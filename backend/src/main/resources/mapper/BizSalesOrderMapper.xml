@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.enterprise.dashboard.mapper.BizSalesOrderMapper">
+
+    <select id="selectSalesByRegion" resultType="map">
+        SELECT region, COUNT(*) as orderCount, SUM(total_amount) as totalAmount
+        FROM biz_sales_order
+        GROUP BY region
+        ORDER BY totalAmount DESC
+    </select>
+
+    <select id="selectTopCustomers" resultType="map">
+        SELECT c.id, c.customer_name, COUNT(o.id) as orderCount, SUM(o.total_amount) as totalAmount
+        FROM biz_customer c
+        LEFT JOIN biz_sales_order o ON c.id = o.customer_id
+        GROUP BY c.id, c.customer_name
+        ORDER BY totalAmount DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectTotalRevenue" resultType="java.math.BigDecimal">
+        SELECT COALESCE(SUM(total_amount), 0)
+        FROM biz_sales_order
+    </select>
+
+    <select id="selectTotalOrderCount" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM biz_sales_order
+    </select>
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.enterprise.dashboard.mapper.BizRiskAlertMapper">
+
+    <select id="selectRiskSummary" resultType="map">
+        SELECT
+            COUNT(*) as totalAlerts,
+            SUM(CASE WHEN status = 0 THEN 1 ELSE 0 END) as unresolvedCount,
+            SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END) as resolvedCount,
+            SUM(CASE WHEN alert_level = 3 THEN 1 ELSE 0 END) as criticalCount,
+            SUM(CASE WHEN alert_level = 2 THEN 1 ELSE 0 END) as highCount
+        FROM biz_risk_alert
+    </select>
+
+    <select id="selectRecentAlerts" resultType="map">
+        SELECT id, alert_type, alert_level, title, content, dept_id, status, alert_time, resolve_time
+        FROM biz_risk_alert
+        ORDER BY alert_time DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectRiskStatisticsByType" resultType="map">
+        SELECT alert_type, COUNT(*) as count
+        FROM biz_risk_alert
+        GROUP BY alert_type
+        ORDER BY count DESC
+    </select>
+
+    <select id="selectRiskStatisticsByLevel" resultType="map">
+        SELECT alert_level, COUNT(*) as count
+        FROM biz_risk_alert
+        GROUP BY alert_level
+        ORDER BY alert_level DESC
+    </select>
+
+    <select id="selectRiskTrend" resultType="map">
+        SELECT DATE(alert_time) as alertDate, COUNT(*) as alertCount
+        FROM biz_risk_alert
+        WHERE alert_time >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+        GROUP BY DATE(alert_time)
+        ORDER BY alertDate
+    </select>
+
+</mapper>
