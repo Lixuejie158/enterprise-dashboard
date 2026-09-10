@@ -134,7 +134,8 @@ public class SalesServiceImpl implements SalesService {
                 BizSalesOrder firstOrder = customerOrders.get(0);
 
                 TopCustomerDTO dto = new TopCustomerDTO();
-                dto.setCustomerName(firstOrder.getCustomerName());
+                BizCustomer customer = customerMapper.selectById(firstOrder.getCustomerId());
+                dto.setCustomerName(customer != null ? customer.getCustomerName() : "Unknown");
                 dto.setRegion(firstOrder.getRegion());
 
                 BigDecimal totalAmount = customerOrders.stream()

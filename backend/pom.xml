@@ -64,12 +64,6 @@
             <version>${springdoc.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-core</artifactId>
-            <version>${springdoc.version}</version>
-        </dependency>
-
         <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
