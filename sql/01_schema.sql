@@ -94,7 +94,7 @@ CREATE TABLE biz_order_item (
 -- ============================================
 CREATE TABLE biz_financial_monthly (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    year_month VARCHAR(7) NOT NULL COMMENT '年月，格式：2025-01',
+    `year_month` VARCHAR(7) NOT NULL COMMENT '年月，格式：2025-01',
     dept_id BIGINT COMMENT '部门ID，NULL表示公司整体',
     revenue DECIMAL(16,2) DEFAULT 0 COMMENT '营业收入（万元）',
     cost DECIMAL(16,2) DEFAULT 0 COMMENT '营业成本（万元）',
@@ -108,7 +108,7 @@ CREATE TABLE biz_financial_monthly (
     accounts_payable DECIMAL(16,2) DEFAULT 0 COMMENT '应付账款（万元）',
     inventory_value DECIMAL(16,2) DEFAULT 0 COMMENT '库存金额（万元）',
     create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE KEY uk_year_month_dept (year_month, dept_id)
+    UNIQUE KEY uk_year_month_dept (`year_month`, dept_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='月度财务汇总表';
 
 -- ============================================
