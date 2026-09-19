@@ -20,10 +20,10 @@
     </select>
 
     <select id="selectRiskStatisticsByType" resultType="map">
-        SELECT alert_type, COUNT(*) as count
+        SELECT alert_type, COUNT(*) as \`count\`
         FROM biz_risk_alert
         GROUP BY alert_type
-        ORDER BY count DESC
+        ORDER BY \`count\` DESC
     </select>
 
     <select id="selectRiskStatisticsByLevel" resultType="map">
