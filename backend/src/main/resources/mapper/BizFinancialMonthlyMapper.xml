@@ -3,35 +3,35 @@
 <mapper namespace="com.enterprise.dashboard.mapper.BizFinancialMonthlyMapper">
 
     <select id="selectRevenueTrend" resultType="map">
-        SELECT year_month, revenue, gross_profit, net_profit
+        SELECT `year_month`, revenue, gross_profit, net_profit
         FROM biz_financial_monthly
-        WHERE year_month LIKE CONCAT(#{year}, '%')
-        ORDER BY year_month
+        WHERE `year_month` LIKE CONCAT(#{year}, '%')
+        ORDER BY `year_month`
     </select>
 
     <select id="selectMonthlyReport" resultType="map">
-        SELECT year_month, revenue, cost, gross_profit, operating_expense, net_profit,
+        SELECT `year_month`, revenue, cost, gross_profit, operating_expense, net_profit,
                total_assets, total_liabilities, cash_flow
         FROM biz_financial_monthly
-        WHERE year_month LIKE CONCAT(#{year}, '%')
-        ORDER BY year_month
+        WHERE `year_month` LIKE CONCAT(#{year}, '%')
+        ORDER BY `year_month`
     </select>
 
     <select id="selectLatestBalanceStructure" resultType="map">
         SELECT total_assets, total_liabilities, cash_flow,
                accounts_receivable, accounts_payable, inventory_value
         FROM biz_financial_monthly
-        ORDER BY year_month DESC
+        ORDER BY `year_month` DESC
         LIMIT 1
     </select>
 
     <select id="selectCostAnalysis" resultType="map">
-        SELECT year_month, cost, operating_expense,
+        SELECT `year_month`, cost, operating_expense,
                (cost / NULLIF(revenue, 0)) * 100 as costRatio,
                (operating_expense / NULLIF(revenue, 0)) * 100 as expenseRatio
         FROM biz_financial_monthly
-        WHERE year_month LIKE CONCAT(#{year}, '%')
-        ORDER BY year_month
+        WHERE `year_month` LIKE CONCAT(#{year}, '%')
+        ORDER BY `year_month`
     </select>
 
 </mapper>
