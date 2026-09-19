@@ -165,7 +165,7 @@ INSERT INTO biz_product (product_name, category, unit_price, unit, status) VALUE
 -- ============================================
 -- 5. Financial Monthly Data
 -- ============================================
-INSERT INTO biz_financial_monthly (year_month, dept_id, revenue, cost, gross_profit, operating_expense, net_profit, total_assets, total_liabilities, cash_flow, accounts_receivable, accounts_payable, inventory_value) VALUES
+INSERT INTO biz_financial_monthly (`year_month`, dept_id, revenue, cost, gross_profit, operating_expense, net_profit, total_assets, total_liabilities, cash_flow, accounts_receivable, accounts_payable, inventory_value) VALUES
 -- Company-wide (8 months)
 ('2025-01', NULL, 850.00, 510.00, 340.00, 180.00, 160.00, 8500.00, 3400.00, 850.00, 680.00, 420.00, 520.00),
 ('2025-02', NULL, 897.00, 534.84, 362.16, 186.24, 175.92, 8765.00, 3412.00, 920.00, 720.00, 445.00, 535.60),
